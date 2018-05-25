@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <LinearLayout
+                android:id="@+id/layout_1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/child_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="5"
+                    android:background="@color/container_color"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="5dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/article"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/amount"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/price"
+                        android:layout_weight="1"
+                        android:gravity="center"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/discount"
+                        android:layout_weight="1"
+                        android:gravity="center"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/total"
+                        android:layout_weight="1"
+                        android:gravity="center"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/child_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="5"
+                    android:layout_marginTop="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/chocolate"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="250g"
+                        android:layout_weight="1"
+                        android:gravity="center"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="3"
+                        android:layout_weight="1"
+                        android:gravity="center"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="1,02€ 0%"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="1,02€"
+                        android:layout_weight="1"
+                        android:gravity="center"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/child_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="5"
+                    android:layout_marginTop="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/beer"
+                        android:layout_weight="1"
+                        android:gravity="center"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="0,33L"
+                        android:layout_weight="1"
+                        android:gravity="center"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:layout_weight="1"
+                        android:gravity="center"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="1,02€ 0%"
+                        android:layout_weight="1"
+                        android:gravity="center"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="1,02€"
+                        android:layout_weight="1"
+                        android:gravity="center"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@color/container_color"
+                    android:layout_marginTop="100dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/total"
+                                android:layout_width="50dp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/total"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"/>
+
+                            <TextView
+                                android:id="@+id/tota"
+                                android:layout_width="50dp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/total"
+                                android:layout_marginLeft="25dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/discount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/discount_2"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"/>
+
+                            <TextView
+                                android:id="@+id/dis"
+                                android:layout_width="50dp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/total"
+                                android:layout_marginLeft="25dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"/>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="123,33$"
+                        android:layout_gravity="center"
+                        android:textSize="30dp"
+                        android:gravity="right|end"
+                        android:layout_marginLeft="20dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="bottom"
+                    android:gravity="bottom"
+                    android:layout_marginTop="20dp">
+                    <Button
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:text="@string/cash"
+                        android:layout_marginLeft="10dp"
+                        android:background="@color/button_color"/>
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:minWidth="100dp"
+                        android:layout_height="50dp"
+                        android:text="@string/cash_am"
+                        android:layout_marginLeft="10dp"
+                        android:background="@color/button_color"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <LinearLayout
+                android:id="@+id/layout_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/gridView1"
+                    android:numColumns="auto_fit"
+                    android:gravity="center"
+                    android:columnWidth="100dp"
+                    android:stretchMode="columnWidth"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:weightSum="2">
+
+                </GridView>
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:weightSum="2"-->
+                    <!--android:layout_marginTop="10dp">-->
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="70dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--android:layout_marginRight="5dp"-->
+                        <!--android:layout_marginBottom="5dp"-->
+                        <!--android:background="@color/container_color"-->
+                        <!--android:weightSum="2"-->
+                        <!--android:orientation="vertical">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="0dp"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:background="@color/container_color"-->
+                            <!--android:gravity="left|center"-->
+                            <!--android:text="takeit"-->
+                            <!--android:paddingLeft="10dp"/>-->
+                        <!--<TextView-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="0dp"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:background="@color/container_color"-->
+                            <!--android:gravity="right|center"-->
+                            <!--android:text="right now"-->
+                            <!--android:paddingRight="10dp"/>-->
+
+                    <!--</LinearLayout>-->
+
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="70dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--android:layout_marginRight="5dp"-->
+                        <!--android:layout_marginBottom="5dp"-->
+                        <!--android:background="@color/container_color"-->
+                        <!--android:weightSum="2"-->
+                        <!--android:orientation="vertical">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="0dp"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:background="@color/container_color"-->
+                            <!--android:gravity="left|center"-->
+                            <!--android:text="takeit"-->
+                            <!--android:paddingLeft="10dp"/>-->
+                        <!--<TextView-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="0dp"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:background="@color/container_color"-->
+                            <!--android:gravity="right|center"-->
+                            <!--android:text="right now"-->
+                            <!--android:paddingRight="10dp"/>-->
+
+                    <!--</LinearLayout>-->
+
+
+                <!--</LinearLayout>-->
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:weightSum="2"-->
+                    <!--android:layout_marginTop="10dp">-->
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="70dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--android:layout_marginRight="5dp"-->
+                        <!--android:layout_marginBottom="5dp"-->
+                        <!--android:background="@color/container_color"-->
+                        <!--android:weightSum="2"-->
+                        <!--android:orientation="vertical">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="0dp"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:background="@color/container_color"-->
+                            <!--android:gravity="left|center"-->
+                            <!--android:text="takeit"-->
+                            <!--android:paddingLeft="10dp"/>-->
+                        <!--<TextView-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="0dp"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:background="@color/container_color"-->
+                            <!--android:gravity="right|center"-->
+                            <!--android:text="right now"-->
+                            <!--android:paddingRight="10dp"/>-->
+
+                    <!--</LinearLayout>-->
+
+
+                    <!--<TextView-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="100dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:layout_marginLeft="5dp"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:layout_marginBottom="5dp"/>-->
+
+                <!--</LinearLayout>-->
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/category_recycler_view"
+                    android:background="#fff"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="200dp"
+                    android:gravity="bottom"
+                    android:layout_gravity="bottom"/>
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:weightSum="3"-->
+                    <!--android:layout_marginTop="10dp">-->
+                    <!--<Button-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="70dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--android:layout_marginRight="5dp"-->
+                        <!--android:layout_marginBottom="5dp"-->
+                        <!--android:background="@color/container_color"-->
+                        <!--android:text="@string/beer"/>-->
+
+                    <!--<Button-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="70dp"-->
+                        <!--android:layout_marginBottom="5dp"-->
+                        <!--android:layout_marginLeft="5dp"-->
+                        <!--android:layout_marginRight="5dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:background="@color/container_color"-->
+                        <!--android:text="@string/wine" />-->
+                    <!--<Button-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="70dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:layout_marginLeft="5dp"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:layout_marginBottom="5dp"-->
+                        <!--android:background="@color/container_color"-->
+                        <!--android:text="@string/chocolate"/>-->
+
+
+
+                <!--</LinearLayout>-->
+            </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
+
+
+
+</LinearLayout>

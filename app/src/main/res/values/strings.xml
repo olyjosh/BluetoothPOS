@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">App Name</string>
+    <string name="user_name">Username</string>
+    <string name="password">******</string>
+    <string name="article">Article</string>
+    <string name="amount">Amount</string>
+    <string name="price">Price</string>
+    <string name="discount">disc%</string>
+    <string name="total">Total</string>
+    <string name="cash">Cash</string>
+    <string name="cash_am">Cash ex. am.</string>
+    <string name="beer">Beer</string>
+    <string name="wine">Wine</string>
+    <string name="chocolate">Chocolate</string>
+    <string name="discount_2">Discount: </string>
+    <string name="total_2">Total: </string>
+
+
+</resources>
+

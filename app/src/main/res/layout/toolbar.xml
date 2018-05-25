@@ -1,0 +1,59 @@
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/button_color"
+    android:minHeight="?attr/actionBarSize"
+    android:id="@+id/toolbar">
+
+    <ImageView
+        android:id="@+id/bluetoothState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_cancel_black_24dp"
+        android:padding="8dp"
+        android:layout_gravity="left"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:layout_gravity="center"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right">
+
+        <ImageView
+            android:id="@+id/sync"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_sync"
+            android:padding="8dp"
+            android:layout_gravity="left"/>
+
+        <ImageView
+            android:id="@+id/search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_search_black_24dp"
+            android:padding="8dp"
+            android:layout_gravity="left"/>
+        <ImageView
+            android:id="@+id/print"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_print_black_24dp"
+            android:padding="8dp"
+            android:layout_gravity="left"/>
+        <ImageView
+            android:id="@+id/menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_menu"
+            android:padding="8dp"
+            android:layout_gravity="left"/>
+
+    </LinearLayout>
+
+</android.support.v7.widget.Toolbar>
