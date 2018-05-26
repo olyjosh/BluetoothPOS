@@ -1,6 +1,7 @@
 package com.forestsoftware.pos.activities;
 
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,7 +26,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  implements View.OnClickListener{
     private Toolbar toolbar;
     private EditText username, password;
     private AVLoadingIndicatorView avLoadingIndicatorView;
@@ -38,38 +39,54 @@ public class MainActivity extends AppCompatActivity {
 
         username = (EditText) findViewById(R.id.user_name);
         password = (EditText) findViewById(R.id.password);
-        loginButton = (Button)findViewById(R.id.login);
+        loginButton = (Button) findViewById(R.id.login);
+        loginButton.setOnClickListener(this);
+        init();
 
-
-
-//        toolbar = (Toolbar)findViewById(R.id.toolbar);
-//
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayShowTitleEnabled(false);
-      //  init();
-        final String user = username.getText().toString();
-        final String pass = password.getText().toString();
-
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-        //        avLoadingIndicatorView.setVisibility(View.VISIBLE);
-                loginButton.setEnabled(false);
-                doLogin(username.getText().toString(), password.getText().toString());
-
-            }
-        });
     }
 
     public void init() {
         avLoadingIndicatorView = new AVLoadingIndicatorView(MainActivity.this);
+        avLoadingIndicatorView = (com.wang.avi.AVLoadingIndicatorView) findViewById(R.id.loadingAnimation);
+        avLoadingIndicatorView.setIndicatorColor(R.color.button_color);
         username = (EditText) findViewById(R.id.user_name);
         password = (EditText) findViewById(R.id.password);
-        loginButton = (Button)findViewById(R.id.login);
+        loginButton = (Button) findViewById(R.id.login);
 
 
     }
+
+
+
+    @Override
+    public void onClick(View v)
+    {
+        switch (v.getId())
+        {
+            case R.id.login:
+
+                final String user = username.getText().toString();
+                final String pass = password.getText().toString();
+                if (!username.getText().toString().isEmpty() && !password.getText().toString().isEmpty()) {
+
+
+//                    Toast.makeText(MainActivity.this,"Clicked",Toast.LENGTH_SHORT).show();
+                    loginButton.setClickable(false);
+                    avLoadingIndicatorView.setVisibility(View.VISIBLE);
+                    doLogin(user, pass);
+
+
+                } else {
+                    loginButton.setClickable(true);
+                    Snackbar snackbar = Snackbar.make(v, "Username and Password can not be empty !", Snackbar.LENGTH_LONG).setAction("Action", null);
+                    View sbView = snackbar.getView();
+                    sbView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.button_color));
+                    snackbar.show();
+                }
+                break;
+        }
+    }
+
 
     public void doLogin(String username, String password) {
 
@@ -81,11 +98,9 @@ public class MainActivity extends AppCompatActivity {
                 //  hidepDialog();
                 //onSignupSuccess();
                 Log.d("onResponse", "" + response);
-                // Userresponse userresponse = response;
 
 
-                if (response.isSuccessful())
-                {
+                if (response.isSuccessful()) {
 //                    avLoadingIndicatorView.setVisibility(View.INVISIBLE);
                     UserResponse userResponse = response.body();
                     String token = userResponse.getToken();
@@ -97,17 +112,16 @@ public class MainActivity extends AppCompatActivity {
                     String vendorId = subscriptionMetaData.asString();
 
                     Intent i = new Intent(MainActivity.this, SceneTwo.class);
-                    i.putExtra("VENDOR_ID",vendorId);
+                    i.putExtra("VENDOR_ID", vendorId);
                     startActivity(i);
+                    finish();
 
-                    Toast.makeText(MainActivity.this, "Vendor id: "+vendorId, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Vendor id: " + vendorId, Toast.LENGTH_SHORT).show();
 
-                    Log.wtf("Get Default Message: ", "" + response.code() + " And the vendorId is: "+vendorId);
+                    Log.wtf("Get Default Message: ", "" + response.code() + " And the vendorId is: " + vendorId);
 
-                }
-                else {
-                    if (response.code() == 401)
-                    {
+                } else {
+                    if (response.code() == 401) {
 
                         Toast.makeText(MainActivity.this, "401", Toast.LENGTH_SHORT).show();
 

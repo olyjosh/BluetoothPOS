@@ -60,7 +60,6 @@ public class ProductCategoryAdapt extends RecyclerView.Adapter<ProductCategoryAd
             public void onClick(View v)
             {
                 itemClickListener.onClick(category.get(position).getProducts());
-                Toast.makeText(context,holder.txtView.getText().toString(),Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -74,10 +73,6 @@ public class ProductCategoryAdapt extends RecyclerView.Adapter<ProductCategoryAd
         this.itemClickListener = itemClickListener;
     }
 
-    public interface ItemClickListener
-    {
-        void onClick(List<Product> products);
-        void onClick(Product product);
-    }
+
 
 }

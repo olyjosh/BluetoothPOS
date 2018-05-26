@@ -37,6 +37,8 @@ public class Product {
     @Expose
     private String updatedAt;
 
+    private boolean isAdded;
+
     public Integer getId() {
         return id;
     }
@@ -107,5 +109,13 @@ public class Product {
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public boolean isAdded() {
+        return isAdded;
+    }
+
+    public void setAdded(boolean added) {
+        isAdded = added;
     }
 }

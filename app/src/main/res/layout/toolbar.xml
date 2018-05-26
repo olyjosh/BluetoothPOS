@@ -1,18 +1,30 @@
-<android.support.v7.widget.Toolbar
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/button_color"
     android:minHeight="?attr/actionBarSize"
     android:id="@+id/toolbar">
 
     <ImageView
-        android:id="@+id/bluetoothState"
+        android:id="@+id/logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_cancel_black_24dp"
         android:padding="8dp"
         android:layout_gravity="left"/>
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/loadingAnimation"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:indicatorName="LineSpinFadeLoaderIndicator"
+        android:layout_gravity="left"
+        android:elevation="5dp"
+        android:layout_weight="0.2"
+        android:layout_marginLeft="5dp"
+        android:visibility="gone"
+
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,13 +44,13 @@
             android:padding="8dp"
             android:layout_gravity="left"/>
 
-        <ImageView
-            android:id="@+id/search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_search_black_24dp"
-            android:padding="8dp"
-            android:layout_gravity="left"/>
+        <!--<ImageView-->
+            <!--android:id="@+id/search"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@drawable/ic_search_black_24dp"-->
+            <!--android:padding="8dp"-->
+            <!--android:layout_gravity="left"/>-->
         <ImageView
             android:id="@+id/print"
             android:layout_width="wrap_content"
