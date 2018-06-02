@@ -98,7 +98,7 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener, Vi
     ProductAdapter productAdapter;
     private List<Product> currentProductList;
     private RecyclerView parentLinearLayout;
-    private ImageView menu_button, sync, logout;
+    private ImageView menu_button, sync, logout, print;
     private TextView grand_total, grand_discount, overall_total;
     private AVLoadingIndicatorView avLoadingIndicatorView;
     private double grandTotal;
@@ -108,6 +108,9 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener, Vi
     private PAS pas;
     private Button submit1, submit2;
     String theVendorId = "";
+
+
+    private boolean isTable;
 
 
     //TODO : REMOVE UNUSED CODE
@@ -122,7 +125,6 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener, Vi
             String quantity = intent.getStringExtra("name");
             Log.wtf("things i got>>>>>>>>>", name);
 
-
             Toast.makeText(SceneTwo.this, name + " ", Toast.LENGTH_SHORT).show();
         }
     };
@@ -136,7 +138,6 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener, Vi
 
         submit1 = (Button) findViewById(R.id.cash);
         submit2 = (Button) findViewById(R.id.cash_2);
-
 
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("custom-message"));
 
@@ -158,6 +159,7 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener, Vi
 
         sync = (ImageView) findViewById(R.id.sync);
         logout = (ImageView) findViewById(R.id.logout);
+        print = (ImageView)findViewById(R.id.print);
         sync.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -178,6 +180,14 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener, Vi
             public void onClick(View v) {
                 startActivity(new Intent(SceneTwo.this, MainActivity.class));
                 finish();
+            }
+        });
+
+        print.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isTable = true;
+                printTry();
             }
         });
 
@@ -288,8 +298,7 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener, Vi
                             });
 
                             dialog.show();
-                        }else if(item.getItemId() == R.id.print){
-
+                        } else if (item.getItemId() == R.id.conect) {
                             printTry();
                         }
 
@@ -328,17 +337,15 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener, Vi
                     doCashSubmit();
 
                 }
-
-
             }
         });
 
 
+        doBlutoothInitialization();
+    }
 
-
-        //These from bluetooth OnCreate
-
-        setTitle(R.string.app_title);
+    private void doBlutoothInitialization(){
+//        setTitle(R.string.app_title);
 
         // Get local Bluetooth adapter
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -349,9 +356,7 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener, Vi
                     Toast.LENGTH_LONG).show();
             finish();
         }
-
     }
-
 
     public void doFetchProducts(String vendorId) {
 
@@ -415,8 +420,6 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener, Vi
                 avLoadingIndicatorView.setVisibility(View.VISIBLE);
 
                 Toast.makeText(SceneTwo.this, "there is another error", Toast.LENGTH_SHORT).show();
-
-
             }
         });
     }
@@ -633,17 +636,81 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener, Vi
     /***********************************************************************************************
      * Printing code
      **********************************************************************************************/
-    private void printTry(){
+    private void printTry() {
         Intent serverIntent = new Intent(SceneTwo.this, DeviceListActivity.class);
         startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);
     }
 
-    private void printTableTest(){
+
+    private void printTableTest() {
         SendDataByte(Command.ESC_Init);
         SendDataByte(Command.LF);
-        PrintTable();
+        printTable2();
     }
 
+
+    private void printTable2(){
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd/ HH:mm:ss ");
+        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+        String str = formatter.format(curDate);
+        String date = str + "\n\n\n\n\n\n";
+        if (is58mm) {
+
+            Command.ESC_Align[2] = 0x02;
+            byte[][] allbuf;
+            try {
+                allbuf = new byte[][]{
+
+                        Command.ESC_Init, Command.ESC_Three,
+                        String.format("┏━━┳━━━┳━━┳━━━━┓\n").getBytes("GBK"),
+                        String.format("┃XXXX┃%-6s┃XXXX┃%-8s┃\n", "XXXX", "XXXX").getBytes("GBK"),
+                        String.format("┣━━╋━━━╋━━╋━━━━┫\n").getBytes("GBK"),
+                        String.format("┃XXXX┃%2d/%-3d┃XXXX┃%-8d┃\n", 1, 222, 555).getBytes("GBK"),
+                        String.format("┣━━┻┳━━┻━━┻━━━━┫\n").getBytes("GBK"),
+                        String.format("┃XXXXXX┃%-18s┃\n", "【XX】XXXX/XXXXXX").getBytes("GBK"),
+                        String.format("┣━━━╋━━┳━━┳━━━━┫\n").getBytes("GBK"),
+                        String.format("┃XXXXXX┃%-2s┃XXXX┃%-8s┃\n", "XXXX", "XXXX").getBytes("GBK"),
+                        String.format("┗━━━┻━━┻━━┻━━━━┛\n").getBytes("GBK"),
+                        Command.ESC_Align, "\n".getBytes("GBK")
+                };
+                byte[] buf = Other.byteArraysToBytes(allbuf);
+                SendDataByte(buf);
+                SendDataString(date);
+                SendDataByte(Command.GS_V_m_n);
+            } catch (UnsupportedEncodingException e) {
+                // TODO 自动生成的 catch 块
+                e.printStackTrace();
+            }
+        } else {
+
+            Command.ESC_Align[2] = 0x02;
+            byte[][] allbuf;
+            try {
+                allbuf = new byte[][]{
+
+                        Command.ESC_Init, Command.ESC_Three,
+                        String.format("┏━━┳━━━━━━━┳━━┳━━━━━━━━┓\n").getBytes("GBK"),
+                        String.format("┃XXXX┃%-14s┃XXXX┃%-16s┃\n", "XXXX", "XXXX").getBytes("GBK"),
+                        String.format("┣━━╋━━━━━━━╋━━╋━━━━━━━━┫\n").getBytes("GBK"),
+                        String.format("┃XXXX┃%6d/%-7d┃XXXX┃%-16d┃\n", 1, 222, 55555555).getBytes("GBK"),
+                        String.format("┣━━┻┳━━━━━━┻━━┻━━━━━━━━┫\n").getBytes("GBK"),
+                        String.format("┃XXXXXX┃%-34s┃\n", "【XX】XXXX/XXXXXX").getBytes("GBK"),
+                        String.format("┣━━━╋━━━━━━┳━━┳━━━━━━━━┫\n").getBytes("GBK"),
+                        String.format("┃XXXXXX┃%-12s┃XXXX┃%-16s┃\n", "XXXX", "XXXX").getBytes("GBK"),
+                        String.format("┗━━━┻━━━━━━┻━━┻━━━━━━━━┛\n").getBytes("GBK"),
+                        Command.ESC_Align, "\n".getBytes("GBK")
+                };
+                byte[] buf = Other.byteArraysToBytes(allbuf);
+                SendDataByte(buf);
+                SendDataString(date);
+                SendDataByte(Command.GS_V_m_n);
+            } catch (UnsupportedEncodingException e) {
+                // TODO 自动生成的 catch 块
+                e.printStackTrace();
+            }
+        }
+
+    }
 
     /**
      * POS PRINTING CODE AS IMPORTED
@@ -1052,7 +1119,7 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener, Vi
 
     /*****************************************************************************************************/
     /*
-	 * SendDataString
+     * SendDataString
 	 */
     private void SendDataString(String data) {
 
@@ -1101,29 +1168,37 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener, Vi
                             setTitle(R.string.title_connected_to);
                             setTitle(getTitle() + " " + mConnectedDeviceName);
 
-                            btnScanButton.setText(getText(R.string.Connecting));
-                            Print_Test();//
-                            btnScanButton.setEnabled(false);
-                            editText.setEnabled(true);
-                            imageViewPicture.setEnabled(true);
-                            width_58mm.setEnabled(true);
-                            width_80.setEnabled(true);
-                            hexBox.setEnabled(true);
-                            sendButton.setEnabled(true);
-                            testButton.setEnabled(true);
-                            printbmpButton.setEnabled(true);
-                            btnClose.setEnabled(true);
-                            btn_BMP.setEnabled(true);
-                            btn_ChoseCommand.setEnabled(true);
-                            btn_prtcodeButton.setEnabled(true);
-                            btn_prtsma.setEnabled(true);
-                            btn_prttableButton.setEnabled(true);
-                            btn_camer.setEnabled(true);
-                            btn_scqrcode.setEnabled(true);
-                            Simplified.setEnabled(true);
-                            Korean.setEnabled(true);
-                            big5.setEnabled(true);
-                            thai.setEnabled(true);
+
+
+
+//                            btnScanButton.setText(getText(R.string.Connecting));
+
+                            if(isTable)
+                                printTableTest();
+                            else
+                                Print_Test();//
+
+//                            btnScanButton.setEnabled(false);
+//                            editText.setEnabled(true);
+//                            imageViewPicture.setEnabled(true);
+//                            width_58mm.setEnabled(true);
+//                            width_80.setEnabled(true);
+//                            hexBox.setEnabled(true);
+//                            sendButton.setEnabled(true);
+//                            testButton.setEnabled(true);
+//                            printbmpButton.setEnabled(true);
+//                            btnClose.setEnabled(true);
+//                            btn_BMP.setEnabled(true);
+//                            btn_ChoseCommand.setEnabled(true);
+//                            btn_prtcodeButton.setEnabled(true);
+//                            btn_prtsma.setEnabled(true);
+//                            btn_prttableButton.setEnabled(true);
+//                            btn_camer.setEnabled(true);
+//                            btn_scqrcode.setEnabled(true);
+//                            Simplified.setEnabled(true);
+//                            Korean.setEnabled(true);
+//                            big5.setEnabled(true);
+//                            thai.setEnabled(true);
                             break;
                         case BluetoothService.STATE_CONNECTING:
 //					mTitle.setText(R.string.title_connecting);
@@ -1885,7 +1960,7 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener, Vi
     }
 
     /************************************************************************************************/
-	/*
+    /*
 	 * 生成QR图
 	 */
     private void createImage() {
