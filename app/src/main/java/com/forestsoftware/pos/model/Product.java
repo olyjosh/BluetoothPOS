@@ -23,7 +23,7 @@ public class Product {
     private Integer price;
     @SerializedName("tax")
     @Expose
-    private Integer tax;
+    private Double tax;
     @SerializedName("unit")
     @Expose
     private String unit;
@@ -39,6 +39,11 @@ public class Product {
 
     private boolean isAdded;
 
+    private int quantity =1;
+
+
+   public Product(){}
+   public Product(String name,String price,String amount, String total, String quantity){}
     public Integer getId() {
         return id;
     }
@@ -71,11 +76,11 @@ public class Product {
         this.price = price;
     }
 
-    public Integer getTax() {
+    public Double getTax() {
         return tax;
     }
 
-    public void setTax(Integer tax) {
+    public void setTax(Double tax) {
         this.tax = tax;
     }
 
@@ -118,4 +123,12 @@ public class Product {
     public void setAdded(boolean added) {
         isAdded = added;
     }
+
+    public int getQuantity() { return quantity; }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+
 }

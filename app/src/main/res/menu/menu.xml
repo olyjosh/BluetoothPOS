@@ -1,11 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/one"
+        android:id="@+id/print"
         android:title="Print last document again"/>
 
     <item
-        android:id="@+id/two"
+        android:id="@+id/discount"
         android:title="Discount on the docume"/>
 
 

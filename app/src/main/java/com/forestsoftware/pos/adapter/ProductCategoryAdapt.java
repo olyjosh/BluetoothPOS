@@ -6,20 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.forestsoftware.pos.R;
 import com.forestsoftware.pos.model.Product;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by HP-PC on 5/24/2018.
  */
 
-//public class ProductCategoryAdapt {
-//}
+
 public class ProductCategoryAdapt extends RecyclerView.Adapter<ProductCategoryAdapt.MyViewHolder>
 {
     private ItemClickListener itemClickListener;
@@ -29,11 +26,11 @@ public class ProductCategoryAdapt extends RecyclerView.Adapter<ProductCategoryAd
     public Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public Button txtView;
+        public Button buttonProduct;
 
         public MyViewHolder(View view) {
             super(view);
-            txtView = (Button) view.findViewById(R.id.category_button);
+            buttonProduct = (Button) view.findViewById(R.id.category_button);
 
         }
     }
@@ -53,9 +50,9 @@ public class ProductCategoryAdapt extends RecyclerView.Adapter<ProductCategoryAd
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        holder.txtView.setText(category.get(position).getName());
+        holder.buttonProduct.setText(category.get(position).getName());
 
-        holder.txtView.setOnClickListener(new View.OnClickListener() {
+        holder.buttonProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {

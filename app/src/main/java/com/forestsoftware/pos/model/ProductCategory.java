@@ -4,76 +4,77 @@ package com.forestsoftware.pos.model;
  * Created by HP-PC on 5/24/2018.
  */
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-    public class ProductCategory {
+import java.util.List;
 
-        @SerializedName("id")
-        @Expose
-        private Integer id;
-        @SerializedName("vendorId")
-        @Expose
-        private Integer vendorId;
-        @SerializedName("name")
-        @Expose
-        private String name;
-        @SerializedName("createdAt")
-        @Expose
-        private String createdAt;
-        @SerializedName("updatedAt")
-        @Expose
-        private String updatedAt;
-        @SerializedName("Products")
-        @Expose
-        private List<Product> products = null;
+public class ProductCategory {
 
-        public Integer getId() {
-            return id;
-        }
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+    @SerializedName("vendorId")
+    @Expose
+    private Integer vendorId;
+    @SerializedName("name")
+    @Expose
+    private String name;
+    @SerializedName("createdAt")
+    @Expose
+    private String createdAt;
+    @SerializedName("updatedAt")
+    @Expose
+    private String updatedAt;
+    @SerializedName("Products")
+    @Expose
+    private List<Product> products = null;
 
-        public void setId(Integer id) {
-            this.id = id;
-        }
+    public Integer getId() {
+        return id;
+    }
 
-        public Integer getVendorId() {
-            return vendorId;
-        }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-        public void setVendorId(Integer vendorId) {
-            this.vendorId = vendorId;
-        }
+    public Integer getVendorId() {
+        return vendorId;
+    }
 
-        public String getName() {
-            return name;
-        }
+    public void setVendorId(Integer vendorId) {
+        this.vendorId = vendorId;
+    }
 
-        public void setName(String name) {
-            this.name = name;
-        }
+    public String getName() {
+        return name;
+    }
 
-        public String getCreatedAt() {
-            return createdAt;
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-        public void setCreatedAt(String createdAt) {
-            this.createdAt = createdAt;
-        }
+    public String getCreatedAt() {
+        return createdAt;
+    }
 
-        public String getUpdatedAt() {
-            return updatedAt;
-        }
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
 
-        public void setUpdatedAt(String updatedAt) {
-            this.updatedAt = updatedAt;
-        }
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
 
-        public List<Product> getProducts() {
-            return products;
-        }
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 
-        public void setProducts(List<Product> products) {
-            this.products = products;
-        }
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
 }
