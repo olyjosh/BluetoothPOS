@@ -373,7 +373,7 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener, Vi
             public void onClick(View v) {
                 String text = grand_total.getText().toString();
                 if (text.isEmpty()) {
-                    Toast.makeText(SceneTwo.this, "Toatal can not be empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SceneTwo.this, "Total can not be empty", Toast.LENGTH_SHORT).show();
                 } else {
                     doCashExSubmit();
 
@@ -738,6 +738,7 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener, Vi
                         String.format("┃XXXXXX┃%-2s┃XXXX┃%-8s┃\n", "XXXX", "XXXX").getBytes("GBK"),
                         String.format("┗━━━┻━━┻━━┻━━━━┛\n").getBytes("GBK"),
                         Command.ESC_Align, "\n".getBytes("GBK")
+
                 };
                 byte[] buf = Other.byteArraysToBytes(allbuf);
                 SendDataByte(buf);
