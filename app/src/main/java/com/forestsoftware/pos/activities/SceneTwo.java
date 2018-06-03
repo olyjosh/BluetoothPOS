@@ -252,7 +252,7 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener {
 
                                                     isAlreadyDiscounted = true;
 
-//                                                    dialog.dismiss();
+//                                                    dialog.dismiss()..;
                                                 }
                                                 dialog.dismiss();
 
