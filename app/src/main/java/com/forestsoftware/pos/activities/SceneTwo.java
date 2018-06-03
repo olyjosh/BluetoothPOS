@@ -117,10 +117,6 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener, Vi
     private static NumberFormat nf = NumberFormat.getNumberInstance(Locale.FRENCH);
 
 
-    private boolean isTable;
-
-
-    //TODO : REMOVE UNUSED CODE
     public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -400,19 +396,6 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener, Vi
         doBlutoothInitialization();
     }
 
-    private void doBlutoothInitialization(){
-//        setTitle(R.string.app_title);
-
-        // Get local Bluetooth adapter
-        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-
-        // If the adapter is null, then Bluetooth is not supported
-        if (mBluetoothAdapter == null) {
-            Toast.makeText(this, "Bluetooth is not available",
-                    Toast.LENGTH_LONG).show();
-            finish();
-        }
-    }
 
     public void doFetchProducts(String vendorId) {
 
@@ -699,9 +682,32 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener, Vi
     }
 
 
+
+
+
+
+
+
+
     /***********************************************************************************************
      * Printing code
      **********************************************************************************************/
+    private boolean isTable;
+
+    private void doBlutoothInitialization(){
+//        setTitle(R.string.app_title);
+
+        // Get local Bluetooth adapter
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
+        // If the adapter is null, then Bluetooth is not supported
+        if (mBluetoothAdapter == null) {
+            Toast.makeText(this, "Bluetooth is not available",
+                    Toast.LENGTH_LONG).show();
+            finish();
+        }
+    }
+
     private void printTry() {
         Intent serverIntent = new Intent(SceneTwo.this, DeviceListActivity.class);
         startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);
