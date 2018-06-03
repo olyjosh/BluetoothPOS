@@ -642,7 +642,6 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener, Vi
         }
     }
 
-
     private void printTry() {
         Intent serverIntent = new Intent(SceneTwo.this, DeviceListActivity.class);
         startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);
