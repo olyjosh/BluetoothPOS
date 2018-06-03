@@ -219,6 +219,7 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener, Vi
 
                 popup.getMenuInflater().inflate(R.menu.menu, popup.getMenu());
 
+
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
                         if (item.getItemId() == R.id.discount) {
@@ -284,15 +285,8 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener, Vi
                                             String s = perecntField.getText().toString();
                                             double dees = s.isEmpty() ? 0 : Double.valueOf(s);
                                             //    discount = x1.isEmpty() ? 0 : Double.valueOf(x1);
-                                    String totu = removePound(grand_total.getText().toString());
-                                    double total = totu.isEmpty() ? 0 : Double.valueOf(totu);
-                                    String x1 = grand_total.getText().toString();
-                                    String s = perecntField.getText().toString();
-                                    double dees = s.isEmpty() ? 0 : Double.valueOf(s);
-                                    //    discount = x1.isEmpty() ? 0 : Double.valueOf(x1);
 
                                             //  double disc = discount;
-                                    //  double disc = discount;
 
                                             if (s.isEmpty() && optionISChecked == false) {
                                                 Toast.makeText(SceneTwo.this, "Discount is nothing", Toast.LENGTH_SHORT).show();
@@ -308,13 +302,6 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener, Vi
                                                     grand_discount.setText("" + dees + "%");
                                                     overall_total.setText("" + t + "€");
                                                     isAlreadyDiscounted = true;
-                                    if (theTrue[0] == true) {
-                                        double yutu = (dees / 100) * total;
-                                        double t = total - yutu;
-                                        Log.wtf("Yutu is: ", "" + yutu);
-                                        Log.wtf("Value of true: ", "" + t);
-                                        grand_discount.setText("" + dees + "%");
-                                        overall_total.setText("" + t + "€");
 
                                                 } else {
                                                     optionISChecked = true;
@@ -328,7 +315,7 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener, Vi
 
                                                     isAlreadyDiscounted = true;
 
-//                                                    dialog.dismiss()..;
+//                                                    dialog.dismiss();
                                                 }
                                                 dialog.dismiss();
 
@@ -369,7 +356,7 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener, Vi
             public void onClick(View v) {
                 String text = grand_total.getText().toString();
                 if (text.isEmpty()) {
-                    Toast.makeText(SceneTwo.this, "Total can not be empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SceneTwo.this, "Toatal can not be empty", Toast.LENGTH_SHORT).show();
                 } else {
                     doCashExSubmit();
 
@@ -389,11 +376,15 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener, Vi
                     doCashSubmit();
 
                 }
+
+
             }
         });
 
-
+        nf.setGroupingUsed(true);
         doBlutoothInitialization();
+
+
     }
 
 
