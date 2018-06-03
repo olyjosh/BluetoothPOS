@@ -1,12 +1,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/print"
+        android:id="@+id/print_last"
         android:title="Print last document again"/>
 
     <item
         android:id="@+id/discount"
-        android:title="Discount on the docume"/>
+        android:title="Discount on the document"/>
+    <item
+        android:id="@+id/conect"
+        android:title="Coneect AndTest"/>
 
 
 </menu>

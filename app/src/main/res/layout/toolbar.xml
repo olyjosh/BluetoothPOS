@@ -12,8 +12,9 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_cancel_black_24dp"
         android:padding="8dp"
+        android:paddingLeft="1dp"
         android:layout_gravity="left"
-        android:layout_marginLeft="-20dp"/>
+        android:layout_marginLeft="0dp"/>
     <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/loadingAnimation"
         android:layout_width="30dp"
