@@ -143,8 +143,11 @@ public class PAS extends RecyclerView.Adapter<PAS.MyViewHolder> {
 
         if(products.containsKey(product.getId())){
              products.remove(product.getId());
+
         }else{
+            product.setQuantity(1);
             products.put(product.getId(),product);
+
         }
         notifyDataSetChanged();
         calculateTotal();

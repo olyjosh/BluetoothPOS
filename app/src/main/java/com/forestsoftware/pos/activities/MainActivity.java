@@ -68,6 +68,8 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
                 final String user = username.getText().toString();
                 final String pass = password.getText().toString();
+                username.setText("ma@mai.com");
+                password.setText("1");
 
                 if (!username.getText().toString().isEmpty() && !password.getText().toString().isEmpty()) {
 

@@ -9,4 +9,6 @@ public class Constant
     public static String BASE_URL = "https://vendor-app1234.herokuapp.com/api/";
     public static final String PREF_NAME = "POS";
 
+    // I just write this one
+
 }
