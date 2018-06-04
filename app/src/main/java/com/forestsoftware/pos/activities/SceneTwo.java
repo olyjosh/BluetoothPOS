@@ -575,7 +575,6 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener, Vi
                             Toast.makeText(SceneTwo.this, "" + success, Toast.LENGTH_SHORT).show();
                             Log.wtf("Body: ", "" + success);
 
-
                             avLoadingIndicatorView.setVisibility(View.GONE);
 
                         } else {
