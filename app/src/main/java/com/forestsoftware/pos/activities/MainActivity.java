@@ -26,7 +26,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity  implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Toolbar toolbar;
     private EditText username, password;
     private AVLoadingIndicatorView avLoadingIndicatorView;
@@ -53,31 +53,26 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         username = (EditText) findViewById(R.id.user_name);
         password = (EditText) findViewById(R.id.password);
         loginButton = (Button) findViewById(R.id.login);
-
-
     }
 
 
-
     @Override
-    public void onClick(View v)
-    {
-        switch (v.getId())
-        {
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.login:
 
+                //                username.setText("ma@mai.com");
+//                password.setText("1");
                 final String user = username.getText().toString();
                 final String pass = password.getText().toString();
-                username.setText("ma@mai.com");
-                password.setText("1");
+
 
                 if (!username.getText().toString().isEmpty() && !password.getText().toString().isEmpty()) {
 
 
-                   loginButton.setClickable(false);
+                    loginButton.setClickable(false);
                     avLoadingIndicatorView.setVisibility(View.VISIBLE);
                     doLogin(user, pass);
-
 
 
                 } else {
@@ -107,35 +102,30 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
                     GeneralResponse generalResponse = response.body();
                     String token = generalResponse.getToken();
                     SessionManager.setTOKEN(token);
-                     if(token != null && token != "" )
-                     {
+                    if (token != null && token != "") {
 
-                         Log.wtf("&&&&&&&&&",""+token);
-                         JWT parsedJWT = new JWT(token);
-                         Claim subscriptionMetaData = parsedJWT.getClaim("vendorId");
-                         String vendorId = subscriptionMetaData.asString();
+                        Log.wtf("&&&&&&&&&", "" + token);
+                        JWT parsedJWT = new JWT(token);
+                        Claim subscriptionMetaData = parsedJWT.getClaim("vendorId");
+                        String vendorId = subscriptionMetaData.asString();
 
-                         Intent i = new Intent(MainActivity.this, SceneTwo.class);
-                         i.putExtra("VENDOR_ID", vendorId);
-                         startActivity(i);
-                         finish();
+                        Intent i = new Intent(MainActivity.this, SceneTwo.class);
+                        i.putExtra("VENDOR_ID", vendorId);
+                        startActivity(i);
+                        finish();
 
-                         Toast.makeText(MainActivity.this, "Vendor id: " + vendorId, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Vendor id: " + vendorId, Toast.LENGTH_SHORT).show();
 
-                         Log.wtf("Get Default Message: ", "" + response.code() + " And the vendorId is: " + vendorId);
-                     }
-                     else
-                         {
-                             avLoadingIndicatorView.setVisibility(View.INVISIBLE);
-                             loginButton.setClickable(true);
-                             Toast.makeText(MainActivity.this, "Invalid Credential", Toast.LENGTH_SHORT).show();
-                         }
-
+                        Log.wtf("Get Default Message: ", "" + response.code() + " And the vendorId is: " + vendorId);
+                    } else {
+                        avLoadingIndicatorView.setVisibility(View.INVISIBLE);
+                        loginButton.setClickable(true);
+                        Toast.makeText(MainActivity.this, "Invalid Credential", Toast.LENGTH_SHORT).show();
+                    }
 
 
                 } else {
-                    if (response.code() == 401)
-                    {
+                    if (response.code() == 401) {
                         avLoadingIndicatorView.setVisibility(View.INVISIBLE);
 
 

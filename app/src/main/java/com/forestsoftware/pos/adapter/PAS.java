@@ -134,7 +134,7 @@ public class PAS extends RecyclerView.Adapter<PAS.MyViewHolder> {
         this.itemClickListener = itemClickListener;
     }
 
-    public Map getProducts() {
+    public Map<Integer, Product> getProducts() {
         return products;
     }
 
