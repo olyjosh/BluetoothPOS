@@ -112,22 +112,23 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener {
     private boolean isAlreadyDiscounted = false;
     private boolean optionISChecked = false;
     private static NumberFormat nf = NumberFormat.getNumberInstance(Locale.FRENCH);
+    private ImageView noContentImage;
 
 
-    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-
-            String name = intent.getStringExtra("name");
-            String amount = intent.getStringExtra("name");
-            String price = intent.getStringExtra("name");
-            String total = intent.getStringExtra("name");
-            String quantity = intent.getStringExtra("name");
-            Log.wtf("things i got>>>>>>>>>", name);
-
-            Toast.makeText(SceneTwo.this, name + " ", Toast.LENGTH_SHORT).show();
-        }
-    };
+//    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//
+//            String name = intent.getStringExtra("name");
+//            String amount = intent.getStringExtra("name");
+//            String price = intent.getStringExtra("name");
+//            String total = intent.getStringExtra("name");
+//            String quantity = intent.getStringExtra("name");
+//            Log.wtf("things i got>>>>>>>>>", name);
+//
+//            Toast.makeText(SceneTwo.this, name + " ", Toast.LENGTH_SHORT).show();
+//        }
+//    };
 
 
     @Override
@@ -140,7 +141,7 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener {
         submit1 = (Button) findViewById(R.id.cash);
         submit2 = (Button) findViewById(R.id.cash_2);
 
-        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("custom-message"));
+       // LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("custom-message"));
 
         categoryRecyclerView = (RecyclerView) findViewById(R.id.category_recycler_view);
         LinearLayoutManager verticalLayoutmanager = new LinearLayoutManager(SceneTwo.this, LinearLayoutManager.HORIZONTAL, false);
@@ -157,6 +158,8 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener {
         grand_total = (TextView) findViewById(R.id.grand_total);
         grand_discount = (TextView) findViewById(R.id.grand_discount);
         overall_total = (TextView) findViewById(R.id.overal_total);
+
+        noContentImage = (ImageView)findViewById(R.id.no_content);
 
         sync = (ImageView) findViewById(R.id.sync);
         logout = (ImageView) findViewById(R.id.logout);
@@ -189,10 +192,11 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener {
         print.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                isTable = true;
+               // isTable = true;
 
-//                printTableTest();
-                printTry();
+//               // printTableTest();
+                //printTry();
+                handlePrintButton();
             }
         });
 
@@ -216,129 +220,16 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener {
             public void onClick(View v) {
                 PopupMenu popup = new PopupMenu(SceneTwo.this, menu_button);
 
-                popup.getMenuInflater().inflate(R.menu.menu, popup.getMenu());
+                popup.getMenuInflater().inflate(R.menu.print_menu, popup.getMenu());
 
 
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
-                        if (item.getItemId() == R.id.discount) {
-                            final Dialog dialog = new Dialog(SceneTwo.this);
-                            final double[] calculatedDiscount = {0.0};
+                        if (item.getItemId() == R.id.discount)
+                        {
 
 
-                            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                            dialog.setCancelable(false);
-                            dialog.setContentView(R.layout.custom_dialog_discount);
-
-                            final boolean[] theTrue = {false};
-
-                            final EditText perecntField = (EditText) dialog.findViewById(R.id.discount_field);
-                            final RadioGroup radioGroup = (RadioGroup) dialog.findViewById(R.id.radioGroup1);
-
-                            for (int i = 0; i < radioGroup.getChildCount(); i++) {
-
-                                if (isAlreadyDiscounted == false) {
-                                    //Todo && optionISChecked == true
-                                    radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-
-                                        public void onCheckedChanged(RadioGroup group, int checkedId) {
-                                            String s = perecntField.getText().toString();
-                                            double dees = s.isEmpty() ? 0 : Double.valueOf(s);
-                                            switch (checkedId) {
-                                                case R.id.radio_percentage:
-                                                    isPercentageDiscount = true;
-                                                    //  checkDiscounted(radioGroup);
-                                                    theTrue[0] = true;
-                                                    Log.wtf("Value of true: ", "" + theTrue[0] + "and the value of total is" + "" + grand_total.getText());
-
-                                                    break;
-                                                case R.id.radio_fixed_amount:
-                                                    isPercentageDiscount = false;
-                                                    //  checkDiscounted(radioGroup);
-                                                    theTrue[0] = false;
-                                                    Log.wtf("Value of true: ", "" + theTrue[0] + "and the value of total is" + "" + grand_total.getText());
-
-                                                    break;
-
-                                            }
-                                        }
-                                    });
-
-
-                                    Button buttonClose = (Button) dialog.findViewById(R.id.btn_close);
-                                    Button buttonSave = (Button) dialog.findViewById(R.id.btn_save);
-                                    buttonClose.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            dialog.dismiss();
-                                        }
-
-                                    });
-                                    buttonSave.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-
-                                            String totu = removePound(grand_total.getText().toString());
-                                            double total = totu.isEmpty() ? 0 : Double.valueOf(totu);
-                                            String x1 = grand_total.getText().toString();
-                                            String s = perecntField.getText().toString();
-                                            double dees = s.isEmpty() ? 0 : Double.valueOf(s);
-                                            //    discount = x1.isEmpty() ? 0 : Double.valueOf(x1);
-
-                                            //  double disc = discount;
-
-                                            if (s.isEmpty() && optionISChecked == false) {
-                                                Toast.makeText(SceneTwo.this, "Discount is nothing", Toast.LENGTH_SHORT).show();
-
-                                            } else {
-                                                if (theTrue[0] == true) {
-                                                    // isAlreadyDiscounted = true;
-                                                    optionISChecked = true;
-                                                    double yutu = (dees / 100) * total;
-                                                    double t = total - yutu;
-                                                    Log.wtf("Yutu is: ", "" + yutu);
-                                                    Log.wtf("Value of true: ", "" + t);
-                                                    grand_discount.setText("" + dees + "%");
-                                                    overall_total.setText("" + t + "€");
-                                                    isAlreadyDiscounted = true;
-
-                                                } else {
-                                                    optionISChecked = true;
-                                                    double t = total - dees;
-                                                    Log.wtf("Value of false: ", "" + t);
-                                                    grand_discount.setText("" + dees + "€");
-                                                    grand_total.setText("" + getCurrencyFormat(t));
-                                                    overall_total.setText("" + getCurrencyFormat(t) + "€");
-                                                    // new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
-
-
-                                                    isAlreadyDiscounted = true;
-
-//                                                    dialog.dismiss();
-                                                }
-                                                dialog.dismiss();
-
-                                            }
-
-
-                                        }
-                                    });
-
-                                    dialog.show();
-                                    // isAlreadyDiscounted = true;
-                                    // radioGroup.getChildAt(i).setEnabled(false);
-
-
-                                } else {
-                                    Toast.makeText(SceneTwo.this, "Discount already taken", Toast.LENGTH_SHORT).show();
-//                                for (int i = 0; i < radioGroup.getChildCount(); i++) {
-                                    radioGroup.getChildAt(i).setEnabled(true);
-//                                }
-                                }
-
-                            }
                         }
-//                        return isAlreadyDiscounted;
                         return true;
 
                     }
@@ -406,27 +297,28 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener {
                     p = productBase.getProductCategories();
 
                     List<String> op = new ArrayList<>();
-
                     List<Product> pp = new ArrayList<>();
                     pp = p.get(0).getProducts();
 
-
                     String pro = pp.get(0).getName();
-
-
                     pCategory = p;
 
+                    if(productBase.getProductCategories() == null)
+                    {
+                        noContentImage.setVisibility(View.VISIBLE);
+                        gridView.setVisibility(View.VISIBLE);
+                        categoryRecyclerView.setVisibility(View.VISIBLE);
+                    }
+                    else
+                        {
+                            categoryRecycler = new ProductCategoryAdapt(productBase.getProductCategories(), SceneTwo.this);
+                            categoryRecyclerView.setAdapter(categoryRecycler);
+                            categoryRecycler.setItemClickListener(SceneTwo.this);
+                            productAdapter = new ProductAdapter(SceneTwo.this, propro, parentLinearLayout, SceneTwo.this);
 
-                    categoryRecycler = new ProductCategoryAdapt(productBase.getProductCategories(), SceneTwo.this);
-                    categoryRecyclerView.setAdapter(categoryRecycler);
+                        }
 
-                    categoryRecycler.setItemClickListener(SceneTwo.this);
 
-                    productAdapter = new ProductAdapter(SceneTwo.this, propro, parentLinearLayout, SceneTwo.this);
-
-                    Toast.makeText(SceneTwo.this, "Success", Toast.LENGTH_SHORT).show();
-
-                    Log.wtf("Get Default Message: ", "" + response.code() + " And the >> is: " + response.body());
 
                 } else {
                     if (response.code() == 401) {
@@ -436,7 +328,7 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener {
 
                     } else {
 
-                        Toast.makeText(SceneTwo.this, "there is another error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SceneTwo.this, "There is another error", Toast.LENGTH_SHORT).show();
                     }
 
                 }
@@ -448,7 +340,7 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener {
                 Log.wtf("onFailure", t.toString());
                 avLoadingIndicatorView.setVisibility(View.VISIBLE);
 
-                Toast.makeText(SceneTwo.this, "there is another error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SceneTwo.this, "There is another error", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -517,7 +409,7 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener {
                 if (response.isSuccessful()) {
                     GeneralResponse generalResponse = response.body();
                     String success = generalResponse.getMessage();
-                    Toast.makeText(SceneTwo.this, "" + success, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SceneTwo.this, "" + success, Toast.LENGTH_SHORT).show();
                     Log.wtf("Body: ", "" + success);
 
                     avLoadingIndicatorView.setVisibility(View.GONE);
@@ -618,7 +510,7 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener {
 
                             GeneralResponse generalResponse = response.body();
                             String success = generalResponse.getMessage();
-                            Toast.makeText(SceneTwo.this, "" + success, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(SceneTwo.this, "" + success, Toast.LENGTH_SHORT).show();
                             Log.wtf("Body: ", "" + success);
 
                             avLoadingIndicatorView.setVisibility(View.GONE);
@@ -666,6 +558,32 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener {
         }
     }
 
+    public void handlePrintButton()
+    {
+
+                PopupMenu popup = new PopupMenu(SceneTwo.this, print);
+                popup.getMenuInflater().inflate(R.menu.print_menu, popup.getMenu());
+
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if (item.getItemId() == R.id.connect_printer)
+                        {
+                           // Toast.makeText(SceneTwo.this,"working",Toast.LENGTH_SHORT).show();
+
+                        }
+                        if (item.getItemId() == R.id.disconnect_printer) {
+
+
+                        }
+                        return true;
+
+                    }
+                });
+
+                popup.show();
+
+    }
+
     public static String getCurrencyFormat(double value) {
         return nf.format(value) + "€";
     }
@@ -680,7 +598,8 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener {
 //        setTitle(R.string.app_title);
 
         // Get local Bluetooth adapter
-        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        mBluetoothAdapter
+                = BluetoothAdapter.getDefaultAdapter();
 
         // If the adapter is null, then Bluetooth is not supported
         if (mBluetoothAdapter == null) {

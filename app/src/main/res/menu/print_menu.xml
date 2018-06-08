@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/connect_printer"
+        android:title="Connect Printer"/>
+
+    <item
+        android:id="@+id/disconnect_printer"
+        android:title="Disconnect Printer"/>
+
+</menu>

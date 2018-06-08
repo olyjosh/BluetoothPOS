@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         startActivity(i);
                         finish();
 
-                        Toast.makeText(MainActivity.this, "Vendor id: " + vendorId, Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(MainActivity.this, "Vendor id: " + vendorId, Toast.LENGTH_SHORT).show();
 
                         Log.wtf("Get Default Message: ", "" + response.code() + " And the vendorId is: " + vendorId);
                     } else {
@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     } else {
                         avLoadingIndicatorView.setVisibility(View.INVISIBLE);
 
-                        Toast.makeText(MainActivity.this, "there is another error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "There is another error", Toast.LENGTH_SHORT).show();
                     }
 
                 }

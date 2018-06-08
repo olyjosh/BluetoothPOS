@@ -62,7 +62,7 @@ public class ProductAdapter extends BaseAdapter {
 
 
             t1.setText(product.getName());
-            t2.setText(String.valueOf(product.getPrice()));
+            t2.setText(String.valueOf(product.getPrice()) + " €");
 
             Intent intent = new Intent("custom-message");
 
