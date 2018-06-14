@@ -220,7 +220,7 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener {
             public void onClick(View v) {
                 PopupMenu popup = new PopupMenu(SceneTwo.this, menu_button);
 
-                popup.getMenuInflater().inflate(R.menu.print_menu, popup.getMenu());
+                popup.getMenuInflater().inflate(R.menu.menu, popup.getMenu());
 
 
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {

@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/title"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="0dp"
         android:gravity="center_vertical|center_horizontal"
         android:orientation="horizontal"
         android:paddingLeft="10dp"
@@ -32,12 +32,12 @@
 
         <TextView
             android:layout_width="50dp"
-            android:layout_height="30dp"
+            android:layout_height="50dp"
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:background="@color/button_color"
             android:gravity="center"
-            android:text="Money"
+            android:text="Amount paid"
             android:textColor="#080000" />
 
         <EditText
@@ -48,7 +48,7 @@
             android:layout_margin="5dp"
             android:layout_weight="3"
             android:background="@color/container_color"
-            android:gravity="left"
+            android:gravity="left|center"
             android:inputType="number"
             android:paddingLeft="5dp"
             android:textColor="#080000" />
@@ -69,7 +69,7 @@
 
         <TextView
             android:layout_width="50dp"
-            android:layout_height="30dp"
+            android:layout_height="50dp"
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:background="@color/button_color"
@@ -85,7 +85,7 @@
             android:layout_margin="5dp"
             android:layout_weight="3"
             android:background="@color/container_color"
-            android:gravity="left"
+            android:gravity="left|center"
             android:inputType="number"
             android:paddingLeft="5dp"
             android:textColor="#080000" />
@@ -121,7 +121,7 @@
             android:layout_margin="5dp"
             android:layout_weight="3"
             android:background="@color/container_color"
-            android:gravity="left"
+            android:gravity="left|center"
             android:inputType="number"
             android:paddingLeft="5dp"
             android:textColor="#080000" />
