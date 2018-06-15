@@ -141,7 +141,7 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener {
         submit1 = (Button) findViewById(R.id.cash);
         submit2 = (Button) findViewById(R.id.cash_2);
 
-       // LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("custom-message"));
+        // LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("custom-message"));
 
         categoryRecyclerView = (RecyclerView) findViewById(R.id.category_recycler_view);
         LinearLayoutManager verticalLayoutmanager = new LinearLayoutManager(SceneTwo.this, LinearLayoutManager.HORIZONTAL, false);
@@ -159,7 +159,7 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener {
         grand_discount = (TextView) findViewById(R.id.grand_discount);
         overall_total = (TextView) findViewById(R.id.overal_total);
 
-        noContentImage = (ImageView)findViewById(R.id.no_content);
+        noContentImage = (ImageView) findViewById(R.id.no_content);
 
         sync = (ImageView) findViewById(R.id.sync);
         logout = (ImageView) findViewById(R.id.logout);
@@ -192,7 +192,7 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener {
         print.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // isTable = true;
+                // isTable = true;
 
 //               // printTableTest();
                 //printTry();
@@ -225,10 +225,124 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener {
 
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
-                        if (item.getItemId() == R.id.discount)
-                        {
+                        if (item.getItemId() == R.id.discount) {
+
+                            final Dialog dialog = new Dialog(SceneTwo.this);
+                            final double[] calculatedDiscount = {0.0};
 
 
+                            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            dialog.setCancelable(false);
+                            dialog.setContentView(R.layout.custom_dialog_discount);
+
+                            final boolean[] theTrue = {false};
+                            if (item.getItemId() == R.id.discount) {
+
+                                final EditText perecntField = (EditText) dialog.findViewById(R.id.discount_field);
+                                final RadioGroup radioGroup = (RadioGroup) dialog.findViewById(R.id.radioGroup1);
+
+                                for (int i = 0; i < radioGroup.getChildCount(); i++) {
+
+                                    if (isAlreadyDiscounted == false) {
+                                        //Todo && optionISChecked == true
+                                        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+                                            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                                                String s = perecntField.getText().toString();
+                                                double dees = s.isEmpty() ? 0 : Double.valueOf(s);
+                                                switch (checkedId) {
+                                                    case R.id.radio_percentage:
+                                                        isPercentageDiscount = true;
+                                                        //  checkDiscounted(radioGroup);
+                                                        theTrue[0] = true;
+                                                        Log.wtf("Value of true: ", "" + theTrue[0] + "and the value of total is" + "" + grand_total.getText());
+
+                                                        break;
+                                                    case R.id.radio_fixed_amount:
+                                                        isPercentageDiscount = false;
+                                                        //  checkDiscounted(radioGroup);
+                                                        theTrue[0] = false;
+                                                        Log.wtf("Value of true: ", "" + theTrue[0] + "and the value of total is" + "" + grand_total.getText());
+
+                                                        break;
+
+                                                }
+                                            }
+                                        });
+
+
+                                        Button buttonClose = (Button) dialog.findViewById(R.id.btn_close);
+                                        Button buttonSave = (Button) dialog.findViewById(R.id.btn_save);
+                                        buttonClose.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                dialog.dismiss();
+                                            }
+
+                                        });
+                                        buttonSave.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+
+                                                String totu = removePound(grand_total.getText().toString());
+                                                double total = totu.isEmpty() ? 0 : Double.valueOf(totu);
+                                                String x1 = grand_total.getText().toString();
+                                                String s = perecntField.getText().toString();
+                                                double dees = s.isEmpty() ? 0 : Double.valueOf(s);
+                                                //    discount = x1.isEmpty() ? 0 : Double.valueOf(x1);
+
+                                                //  double disc = discount;
+
+                                                if (s.isEmpty() && optionISChecked == false) {
+                                                    Toast.makeText(SceneTwo.this, "Discount is nothing", Toast.LENGTH_SHORT).show();
+
+                                                } else {
+                                                    if (theTrue[0] == true) {
+                                                        // isAlreadyDiscounted = true;-                                                    optionISChecked = true;
+                                                        double yutu = (dees / 100) * total;
+                                                        double t = total - yutu;
+                                                        Log.wtf("Yutu is: ", "" + yutu);
+                                                        Log.wtf("Value of true: ", "" + t);
+                                                        grand_discount.setText("" + dees + "%");
+                                                        overall_total.setText("" + String.format("%.2f",t) + "€");
+                                                        isAlreadyDiscounted = true;
+
+                                                    } else {
+                                                        optionISChecked = true;
+                                                        double t = total - dees;
+                                                        Log.wtf("Value of false: ", "" + t);
+                                                        grand_discount.setText("" + dees + "€");
+                                                        grand_total.setText("" + getCurrencyFormat(t));
+                                                        overall_total.setText("" + getCurrencyFormat(t) );
+                                                        // new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
+
+
+                                                        isAlreadyDiscounted = true;
+
+                                                        //                                                    dialog.dismiss();
+                                                    }
+                                                    dialog.dismiss();
+
+                                                }
+
+
+                                            }
+                                        });
+
+                                        dialog.show();
+                                        // isAlreadyDiscounted = true;
+                                        // radioGroup.getChildAt(i).setEnabled(false);
+
+
+                                    } else {
+                                        Toast.makeText(SceneTwo.this, "Discount already taken", Toast.LENGTH_SHORT).show();
+                                        //                                for (int i = 0; i < radioGroup.getChildCount(); i++) {
+                                        radioGroup.getChildAt(i).setEnabled(true);
+                                        //                                }
+                                    }
+
+                                }
+                            }
                         }
                         return true;
 
@@ -303,21 +417,17 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener {
                     String pro = pp.get(0).getName();
                     pCategory = p;
 
-                    if(productBase.getProductCategories() == null)
-                    {
+                    if (productBase.getProductCategories() == null) {
                         noContentImage.setVisibility(View.VISIBLE);
                         gridView.setVisibility(View.VISIBLE);
                         categoryRecyclerView.setVisibility(View.VISIBLE);
+                    } else {
+                        categoryRecycler = new ProductCategoryAdapt(productBase.getProductCategories(), SceneTwo.this);
+                        categoryRecyclerView.setAdapter(categoryRecycler);
+                        categoryRecycler.setItemClickListener(SceneTwo.this);
+                        productAdapter = new ProductAdapter(SceneTwo.this, propro, parentLinearLayout, SceneTwo.this);
+
                     }
-                    else
-                        {
-                            categoryRecycler = new ProductCategoryAdapt(productBase.getProductCategories(), SceneTwo.this);
-                            categoryRecyclerView.setAdapter(categoryRecycler);
-                            categoryRecycler.setItemClickListener(SceneTwo.this);
-                            productAdapter = new ProductAdapter(SceneTwo.this, propro, parentLinearLayout, SceneTwo.this);
-
-                        }
-
 
 
                 } else {
@@ -389,7 +499,9 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener {
         int venderId = Integer.valueOf(theVendorId);
 
         double total = Double.valueOf(removePound(grand_total.getText().toString()));
-        double discount = Double.valueOf(grand_discount.getText().toString());
+        String discountString = grand_discount.getText().toString().replace("€","");
+        double discount = Double.valueOf(discountString);
+
 
         int price = (int) pas.calculatePrice();
         String payment = "Exact";
@@ -409,7 +521,7 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener {
                 if (response.isSuccessful()) {
                     GeneralResponse generalResponse = response.body();
                     String success = generalResponse.getMessage();
-                    //Toast.makeText(SceneTwo.this, "" + success, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SceneTwo.this, "" + success, Toast.LENGTH_SHORT).show();
                     Log.wtf("Body: ", "" + success);
 
                     avLoadingIndicatorView.setVisibility(View.GONE);
@@ -488,7 +600,9 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener {
                 Log.wtf("-----token----", "" + token);
                 int venderId = Integer.valueOf(theVendorId);
                 double total = Double.valueOf(removePound(grand_total.getText().toString()));
-                double discount = Double.valueOf(grand_discount.getText().toString());
+                String discountString = grand_discount.getText().toString().replace("€","");
+
+                double discount = Double.valueOf(discountString);
 
                 int price = (int) pas.calculatePrice();
                 String payment = "InExact";
@@ -510,7 +624,7 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener {
 
                             GeneralResponse generalResponse = response.body();
                             String success = generalResponse.getMessage();
-                            //Toast.makeText(SceneTwo.this, "" + success, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SceneTwo.this, "" + success, Toast.LENGTH_SHORT).show();
                             Log.wtf("Body: ", "" + success);
 
                             avLoadingIndicatorView.setVisibility(View.GONE);
@@ -558,29 +672,26 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener {
         }
     }
 
-    public void handlePrintButton()
-    {
+    public void handlePrintButton() {
 
-                PopupMenu popup = new PopupMenu(SceneTwo.this, print);
-                popup.getMenuInflater().inflate(R.menu.print_menu, popup.getMenu());
+        PopupMenu popup = new PopupMenu(SceneTwo.this, print);
+        popup.getMenuInflater().inflate(R.menu.print_menu, popup.getMenu());
 
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    public boolean onMenuItemClick(MenuItem item) {
-                        if (item.getItemId() == R.id.connect_printer)
-                        {
-                           // Toast.makeText(SceneTwo.this,"working",Toast.LENGTH_SHORT).show();
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getItemId() == R.id.connect_printer) {
+                    printTry();
+                    //handlePrintButton();
+                }
+                if (item.getItemId() == R.id.disconnect_printer) {
 
-                        }
-                        if (item.getItemId() == R.id.disconnect_printer) {
+                }
+                return true;
 
+            }
+        });
 
-                        }
-                        return true;
-
-                    }
-                });
-
-                popup.show();
+        popup.show();
 
     }
 
@@ -650,7 +761,6 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener {
         //len = bytes.length > len ? bytes.length : len;
 
 
-
         for (Product product : products.values()) {
             byte[] bytes = String.format("┃    ┃%-4s┃    ┃%-3s┃    ┃%-3s┃    ┃%-4s┃\n",
                     product.getName(), product.getPrice() + "€", product.getQuantity(),
@@ -660,14 +770,14 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener {
             lines.add(bytes);
         }
 
-        Log.wtf(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", ""+len);
+        Log.wtf(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", "" + len);
 
         lines.add(Command.ESC_Align);
         len = Command.ESC_Align.length > len ? Command.ESC_Align.length : len;
         byte[] newLine = "\n".getBytes("GBK");
         len = newLine.length > len ? newLine.length : len;
         lines.add(newLine);
-        Log.wtf(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>2", ""+len);
+        Log.wtf(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>2", "" + len);
 
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd/ HH:mm:ss ");
@@ -682,7 +792,7 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener {
             for (int i = 0; i < lines.size(); i++) {
                 byte[] by = lines.get(i);
 
-                System.out.println("---------------------------"+i);
+                System.out.println("---------------------------" + i);
 
                 for (int j = 0; j < by.length; j++) {
                     allbuf[i][j] = by[j];
@@ -1331,7 +1441,7 @@ public class SceneTwo extends AppCompatActivity implements ItemClickListener {
     }
 
     //************************************************************************************************//
-  	/*
+      /*
   	 * 调用系统相机
   	 */
     private void dispatchTakePictureIntent(int actionCode) {

@@ -7,9 +7,9 @@
     <item
         android:id="@+id/discount"
         android:title="Discount on the document"/>
-    <item
-        android:id="@+id/conect"
-        android:title="Coneect AndTest"/>
+    <!--<item-->
+        <!--android:id="@+id/conect"-->
+        <!--android:title="Coneect AndTest"/>-->
 
 
 </menu>

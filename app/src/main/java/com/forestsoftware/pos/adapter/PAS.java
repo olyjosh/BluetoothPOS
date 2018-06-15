@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.forestsoftware.pos.R;
 import com.forestsoftware.pos.model.Product;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -159,6 +160,7 @@ public class PAS extends RecyclerView.Adapter<PAS.MyViewHolder> {
         double tot=0;
         Product product;
         for (Map.Entry<Integer, Product> e: products.entrySet()) {
+
             product =e.getValue();
             tot += product.getPrice() * product.getQuantity();
             theTotal = tot;
@@ -166,6 +168,7 @@ public class PAS extends RecyclerView.Adapter<PAS.MyViewHolder> {
         itemClickListener.onTotalChange(tot);
     }
     public double calculatePrice(){
+        DecimalFormat df = new DecimalFormat("#.00");
 
         double price=0;
         Product product;
